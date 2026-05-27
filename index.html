@@ -552,7 +552,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
     <span class="eyebrow">FORMALISME</span>
     <h2>Convention activity-on-node et structure du nœud</h2>
     <div class="divider-accent"></div>
-    <p class="lead">Chaque tâche est un nœud rectangulaire à quatre compartiments. Les arcs orientés portent uniquement les contraintes de précédence.</p>
+    <p class="lead">Chaque tâche est un nœud rectangulaire à trois compartiments. La durée est portée par l'arc sortant ; les arcs traduisent les contraintes de précédence.</p>
   </div>
   <div class="aon-layout">
     <div class="aon-left">
@@ -563,30 +563,27 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
               <path d="M0,0 L6,3.5 L0,7 z" fill="#6366F1"/>
             </marker>
           </defs>
-          <!-- Predecessor node -->
+          <!-- Predecessor node (3 compartments) -->
           <rect x="20" y="80" width="120" height="80" rx="6" fill="rgba(255,255,255,0.85)" stroke="#5a5a7a" stroke-width="1.5"/>
-          <line x1="80" y1="80" x2="80" y2="160" stroke="#5a5a7a" stroke-width="1"/>
           <line x1="20" y1="120" x2="140" y2="120" stroke="#5a5a7a" stroke-width="1"/>
-          <text x="50" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a2e" font-family="Inter">Tâche</text>
-          <text x="110" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#1a1a2e" font-family="JetBrains Mono">d</text>
+          <line x1="80" y1="120" x2="80" y2="160" stroke="#5a5a7a" stroke-width="1"/>
+          <text x="80" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e" font-family="Inter">Tâche i</text>
           <text x="50" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">DTO</text>
           <text x="110" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">DTA</text>
           <!-- Arrow valued with task duration -->
           <line x1="142" y1="120" x2="318" y2="120" stroke="#6366F1" stroke-width="2.2" marker-end="url(#ah1)"/>
-          <text x="230" y="108" text-anchor="middle" font-size="12" font-style="italic" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">d(i)</text>
-          <!-- Successor node -->
+          <text x="230" y="108" text-anchor="middle" font-size="13" font-style="italic" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">d(i)</text>
+          <!-- Successor node (3 compartments) -->
           <rect x="320" y="80" width="120" height="80" rx="6" fill="rgba(99,102,241,0.10)" stroke="#6366F1" stroke-width="2"/>
-          <line x1="380" y1="80" x2="380" y2="160" stroke="#6366F1" stroke-width="1.5"/>
           <line x1="320" y1="120" x2="440" y2="120" stroke="#6366F1" stroke-width="1.5"/>
-          <text x="350" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a2e" font-family="Inter">Tâche j</text>
-          <text x="410" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#1a1a2e" font-family="JetBrains Mono">d(j)</text>
+          <line x1="380" y1="120" x2="380" y2="160" stroke="#6366F1" stroke-width="1.5"/>
+          <text x="380" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e" font-family="Inter">Tâche j</text>
           <text x="350" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">DTO(j)</text>
           <text x="410" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#6366F1" font-family="JetBrains Mono">DTA(j)</text>
           <!-- Annotations -->
           <text x="80" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#9090b0" font-family="Inter">PRÉDÉCESSEUR i</text>
           <text x="380" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#6366F1" font-family="Inter">SUCCESSEUR j</text>
-          <text x="50" y="195" text-anchor="middle" font-size="10" fill="#9090b0" font-family="Inter">tâche · durée</text>
-          <text x="110" y="195" text-anchor="middle" font-size="10" fill="#9090b0" font-family="Inter">d. tôt · d. tard</text>
+          <text x="80" y="190" text-anchor="middle" font-size="10" fill="#9090b0" font-family="Inter" font-style="italic">nom · date au plus tôt · date au plus tard</text>
         </svg>
         <div class="caption">Structure standard d'un nœud MPM et arc de précédence valué</div>
       </div>
@@ -594,21 +591,21 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
     <div class="aon-right">
       <div class="glass aon-feat">
         <div class="num">01</div>
-        <div><h4>Nom de la tâche</h4><p>Identifiant unique. Convention : T<sub>i</sub> ou code projet (ex. T4 = autorisation municipale).</p></div>
+        <div><h4>Nom de la tâche</h4><p>Identifiant unique placé dans le compartiment supérieur. Convention : T<sub>i</sub> ou code projet (ex. T4 = autorisation municipale).</p></div>
       </div>
       <div class="glass aon-feat">
         <div class="num">02</div>
-        <div><h4>Durée d(i)</h4><p>Estimation déterministe ou probabiliste, dans l'unité de temps du projet.</p>
-        <span class="form">d(i) ≥ 0</span></div>
+        <div><h4>Date au plus tôt — DTO(i)</h4><p>Compartiment inférieur gauche. Date la plus précoce de démarrage, calculée par <b>forward pass</b>.</p>
+        <span class="form">earliest start</span></div>
       </div>
       <div class="glass aon-feat">
         <div class="num">03</div>
-        <div><h4>Dates extrêmes — DTO et DTA</h4><p>DTO : date la plus précoce (forward pass). DTA : date la plus tardive sans retarder le projet (backward pass).</p>
-        <span class="form">earliest / latest start</span></div>
+        <div><h4>Date au plus tard — DTA(i)</h4><p>Compartiment inférieur droit. Date limite de démarrage sans retarder la fin du projet (<b>backward pass</b>).</p>
+        <span class="form">latest start</span></div>
       </div>
       <div class="glass aon-feat">
         <div class="num">→</div>
-        <div><h4>Arc orienté de i vers j</h4><p>Précédence valuée par <b>la durée d(i)</b> de la tâche source. L'arc traduit la contrainte « j commence après i ».</p></div>
+        <div><h4>Arc orienté valué</h4><p>L'arc porte la <b>durée d(i)</b> de la tâche source et traduit la contrainte « j commence après i ».</p></div>
       </div>
     </div>
   </div>
